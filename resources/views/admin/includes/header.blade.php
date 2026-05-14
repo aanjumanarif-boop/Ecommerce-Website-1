@@ -20,15 +20,7 @@
            <ul class="navbar-nav ms-auto">
             <!--begin::Navbar Search-->
      
-            <!--end::Navbar Search-->
-
-            <!--begin::Messages Dropdown Menu-->
-           
-            <!--end::Messages Dropdown Menu-->
-
-            <!--begin::Notifications Dropdown Menu-->
-            
-            <!--end::Notifications Dropdown Menu-->
+      
 
             <!--begin::Fullscreen Toggle-->
             <li class="nav-item">
@@ -39,8 +31,7 @@
             </li>
             <!--end::Fullscreen Toggle-->
 
-            <!--begin::User Menu Dropdown-->
-            <li class="nav-item dropdown user-menu">
+                <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img
                   src="{{asset('admin/assets/img/user2-160x160.jpg')}}"
@@ -87,7 +78,7 @@
                 <!--end::Menu Footer-->
               </ul>
             </li>
-            <!--end::User Menu Dropdown-->
+
           </ul>
           <!--end::End Navbar Links-->
         </div>

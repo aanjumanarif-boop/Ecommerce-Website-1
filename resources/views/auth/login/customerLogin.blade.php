@@ -69,7 +69,7 @@
         }
 
         .login-btn:hover{
-            background:#0056b3;
+            background:#007bff;
         }
 
         .bottom-text{
@@ -85,8 +85,7 @@
     </style>
 </head>
 <body>
-
-    <div class="login-box">
+        <div class="login-box">
         <h2>Customer Login</h2>
 
         <form method="POST" action="{{url('/customer/login/auth')}}">
@@ -100,14 +99,16 @@
                 <label>Password</label>
                 <input type="password" placeholder=" password" name="password" required>
             </div>
-
             <button type="submit" class="login-btn">
                 Login
             </button>
 
-            <div class="bottom-text">
-                Don't have an account?
-                <a href="#">Create Account</a>
+               <div class="bottom-text">
+              <a href="{{url('/customer/registration')}}">Create New Account</a>
+            </div>
+           
+              <div class="bottom-text">
+              <a href="{{url('/')}}">Home</a>
             </div>
         </form>
     </div>

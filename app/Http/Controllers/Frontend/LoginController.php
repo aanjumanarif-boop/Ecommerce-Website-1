@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {
@@ -45,11 +47,41 @@ class LoginController extends Controller
   public function customerLoginAuth(Request $request)
   {
     if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-        return redirect('/customer/dashboard');
+      if(Auth::user()->role == 'customer'){
+         return redirect('/customer/dashboard');
+      }
+      
+      else{
+        $role = Auth::user()->role;
+        Auth::logout();
+        if($role == 'admin'){
+          return redirect('admin/login');
+        }
+        elseif($role == 'employee'){
+         return redirect('employee/login');
+        }
+      }
+
     }
     else{
         return redirect()->back();
     }
   }
+  
+  public function customerRegistration()
+  {
+    return View('auth.login.customer-registration');
+  }
+  public function customerRegistrationStore(Request $request)
+  {
+    $customer = new User();
+    $customer->name = $request->name;
+    $customer->phone = $request->phone;
+    $customer->email= $request->email;
+    $customer->password = $request->password;
 
+    $customer->save();
+    toastr()->success('customer registration successfully');
+    return redirect('/customer/login');
+  }
 }
