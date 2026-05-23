@@ -23,7 +23,8 @@
        @include('admin.includes.footer')
       <!--end::Footer-->
       @include('admin.includes.script')
-   
+      
+      @stack('script')
    
   </body>
   <!--end::Body-->

@@ -8,7 +8,7 @@
                 <!--begin::Row-->
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Add New Category</h3>
+                        <h3 class="mb-0">Edit Categoru</h3>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
@@ -37,26 +37,25 @@
                             </div>
                             <!--end::Header-->
                             <!--begin::Form-->
-                            <form action="{{url('/manage/category-store')}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{url('/manage/category-update/'.$category->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <!--begin::Body-->
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Category Name</label>
-                                        <input type="text" class="form-control" name="name" id="name" required/>
-
-                                    </div>
+                                        <input type="text" class="form-control" value="{{$category->name}}" name="name" id="name" required/>
+                                      </div>
                                    
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" name="image" id="inputGroupFile02" accept="image/*" required/>
+                                        <input type="file" class="form-control" name="image" id="inputGroupFile02" accept="image/*" />
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
-                                    
+                                    <img src="{{$category->image}}" height="100" width="100">
                                 </div>
                                 <!--end::Body-->
                                 <!--begin::Footer-->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">updatet</button>
                                 </div>
                                 <!--end::Footer-->
                             </form>

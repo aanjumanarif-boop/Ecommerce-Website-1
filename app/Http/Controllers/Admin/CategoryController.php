@@ -17,6 +17,7 @@ class CategoryController extends Controller
       $category = new Category();
       $category->name = $request->name; 
       $category->slug = Str::slug($request->name);
+
       if(isset($request->image)){
         $image = $request->file('image');
         $imageName = rand().'.'.$image->getClientOriginalExtension(); //243541.jpg
@@ -27,5 +28,52 @@ class CategoryController extends Controller
         toastr()->success('Category Create Successfully.');
         return redirect()->back();
    }
- 
+    public function list()
+    {
+      $categories = Category::get();
+     
+      return view('admin.category.list', compact('categories'));
+    }
+    public function edit ($id)
+    {  
+      $category = category::find($id);
+      return view('admin.category.edit',compact('category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+       $category = Category::find($id);
+       $category->name = $request->name;
+       $category->slug = Str::slug($request->name);
+
+        if(isset($request->image)){
+
+        if($category->image && file_exists('admin/category/'.basename($category->image))){
+         unlink('admin/category/'.basename($category->image));
+      }
+
+        $image = $request->file('image');
+        $imageName = rand().'.'.$image->getClientOriginalExtension(); //243541.jpg
+        $image->move('admin/category',  $imageName);
+        $category->image = url('admin/category/'.$imageName);//http://127.0.0.1:8000/admin/category/243541.jpg
+      }
+      $category->save();
+       toastr()->success('Category Updated Successfully.');
+       return redirect('/manage/category-list');
+    }
+
+    public function delete($id)
+    {
+      $category = category::find($id);
+
+      if($category->image && file_exists('admin/category/'.basename($category->image))){
+         unlink('admin/category/'.basename($category->image));
+      }
+
+      $category->delete();
+      
+      toastr()->success('Category delete Successfully.');
+      return redirect()->back();
+
+    }
 }

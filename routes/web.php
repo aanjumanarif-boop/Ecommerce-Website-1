@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -48,6 +50,29 @@ Route::middleware(['role:admin'])->group(function(){
 
    Route::get('/manage/category-create',[CategoryController::class,'create']);
    Route::post('/manage/category-store',[CategoryController::class,'store']);
+   Route::get('/manage/category-list',[CategoryController::class,'list']);
+   Route::get('/manage/category-edit/{id}',[CategoryController::class,'edit']);
+   Route::post('/manage/category-update/{id}',[CategoryController::class,'update']);
+   Route::get('/manage/category-delete/{id}',[CategoryController::class,'delete']);
+
+   
+          //SubCategory Routes......
+   Route::get('/manage/subCategory-create',[SubCategoryController::class,'create']);
+   Route::post('/manage/subCategory-store',[SubCategoryController::class,'store']);
+   Route::get('/manage/subCategory-list',[SubCategoryController::class,'list']);
+   Route::get('/manage/subCategory-edit/{id}',[SubCategoryController::class,'edit']);
+   Route::post('/manage/subCategory-update/{id}',[SubCategoryController::class,'update']);
+   Route::get('/manage/subCategory-delete/{id}',[SubCategoryController::class,'delete']);
+
+          //products Route.......
+   Route::get('/manage/product-create',[ProductController::class,'create']);
+   Route::post('/manage/product-store',[ProductController::class,'store']);
+   Route::get('/manage/product-list',[ProductController::class,'list']);
+   Route::get('/manage/product-edit/{id}',[ProductController::class,'edit']);
+   Route::post('/manage/product-update/{id}',[ProductController::class,'update']);
+   Route::get('/manage/product-delete/{id}',[ProductController::class,'delete']);
+
+
 });
 
 Route::middleware(['role:employee'])->group(function(){
@@ -58,4 +83,6 @@ Route::middleware(['role:employee'])->group(function(){
  Route::middleware(['role:customer'])->group(function(){
    Route::get('/customer/dashboard',[CustomerController::class,'dashboard']);
    Route::get('/customer/logout',[CustomerController::class,'customerLogout']);
+   Route::get('/customer/profile-view',[CustomerController::class,'customerProfileView']);
+   Route::post('/customer/profile-update',[CustomerController::class,'customerProfileUpdate']);
 });
